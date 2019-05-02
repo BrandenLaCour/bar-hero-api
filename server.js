@@ -5,22 +5,14 @@ const app = express();
 const cors = require("cors");
 const uniqid = require("uniqid");
 const sgMail = require("@sendgrid/mail");
-const config = {
-  apiKey: "AIzaSyCHQwzWcJaeVEmAvqq_tCULDIKcqz_cHGo",
-  authDomain: "bar-hero.firebaseapp.com",
-  databaseURL: "https://bar-hero.firebaseio.com",
-  projectId: "bar-hero",
-  storageBucket: "bar-hero.appspot.com",
-  messagingSenderId: "278188655935"
-};
-
-const myKey =
-  "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";
+const keys = require("./apiKeys");
 
 // change below to process.env before deploy
-sgMail.setApiKey(myKey);
 
-firebase.initializeApp(config);
+//ONLY EVER PUSH SERVER.JS TO SAFEGUARD KEYS
+sgMail.setApiKey(keys.myMailKey);
+
+firebase.initializeApp(keys.config);
 
 const db = firebase.firestore();
 
