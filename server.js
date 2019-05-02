@@ -4,7 +4,7 @@ const firebase = require("firebase");
 const app = express();
 const cors = require("cors");
 const uniqid = require("uniqid");
-
+const sgMail = require("@sendgrid/mail");
 const config = {
   apiKey: "AIzaSyCHQwzWcJaeVEmAvqq_tCULDIKcqz_cHGo",
   authDomain: "bar-hero.firebaseapp.com",
@@ -13,6 +13,12 @@ const config = {
   storageBucket: "bar-hero.appspot.com",
   messagingSenderId: "278188655935"
 };
+
+const myKey =
+  "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";
+
+// change below to process.env before deploy
+sgMail.setApiKey(myKey);
 
 firebase.initializeApp(config);
 
@@ -76,7 +82,17 @@ app.get("/urgent", (req, res) => {
 
 app.delete("/delete", (req, res) => {
   const id = req.query.id;
-  console.log("ran", id);
+  const msg = {
+    to: "brandenlacour@gmail.com",
+    from: "bar-hero@sample.com",
+    subject: `urgent task completed`,
+    text: "newest email text",
+    html: `<strong>${req.query.user} completed the urgent task "${
+      req.query.desc
+    }" in room "${req.query.room}" on ${req.query.date}</strong>`
+  };
+  sgMail.send(msg);
+
   db.collection("UrgentTask")
     .doc(id)
     .delete()
@@ -89,7 +105,7 @@ app.delete("/delete", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Home");
+  res.send("email sent");
 });
 
 app.listen(3001);
