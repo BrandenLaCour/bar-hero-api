@@ -27,7 +27,6 @@ app.post("/checklist", (req, res) => {
     .get()
     .then(function(doc) {
       if (doc.exists) {
-        console.log("Document data:", doc.data());
         const list = doc.data();
         res.send(list);
       } else {
@@ -42,7 +41,7 @@ app.post("/checklist", (req, res) => {
 
 app.post("/urgent", (req, res) => {
   const task = req.body;
-  console.log(task, "is the task ");
+
   db.collection("UrgentTask")
     .doc(`task${uniqid()}`)
     .set({
