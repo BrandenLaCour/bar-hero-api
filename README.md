@@ -23,10 +23,11 @@ Npm start
 ```
 
 ## Built With
-
+https://www.npmjs.com/package/@sendgrid/mail
 * [Express](https://expressjs.com/) - awesome framework for node
 * [Firebase](https://firebase.google.com/docs/firestore/quickstart) - An easy to use NoSQL Database solution
 * [Nodemon](https://www.npmjs.com/package/nodemon) - Automatically restarts node after changes
+* [Sendgrid](https://www.npmjs.com/package/@sendgrid/mail) - Sends emails!
 
 ## Contributing
 I am more than happy to take contributions to this project! Just fork, and send a pull request. If you happened to work on one of the above issues. I would be elated! Beers on me if you live in Chicago!
